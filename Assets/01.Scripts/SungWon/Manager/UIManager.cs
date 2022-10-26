@@ -7,44 +7,44 @@ public class UIManager : MonoBehaviour
 {
     #region UI 선언 
 
-    //public Button starBtn;
-    //public Button achievementBtn;
+   /* public Button starBtn;
     public Button DictionaryBtn;
-    public GameObject Dictionary;
+    public Button achievementBtn;
+    public Button SettingNtn;*/
 
     #endregion
 
-    public GameObject DictionaryWin;
+    public Image DictionaryWin;
     public Vector2 OriginPos;
-
-    protected bool isUI;
 
     private void Start()
     {
-
         OriginPos = new Vector2(0, 0);
+
+        DictionaryWin.GetComponent<RectTransform>();
+
     }
 
     public void DicBtn()
     {
-        isUI = false;
-
-        DictionaryWin.transform.DOMove(OriginPos, 1);
-
-        VisiableUI();
-
-        Debug.Log("버튼 작동");
+        DictionaryWin.rectTransform.DOMove(OriginPos, 1);
+        Debug.Log("사전");
     }
 
-    public void VisiableUI()
+    public void StBtn()
     {
-        if (isUI)
-        {
-            Dictionary.SetActive(true);
-        }
-        else
-        {
-            Dictionary.SetActive(false);
-        }
+        Debug.Log("게임 시작");
     }
+    
+    public void SettBtn()
+    {
+        Debug.Log("설정");
+    }
+    
+    public void AchiveBtn()
+    {
+        Debug.Log("도전과제");
+    }
+
+    
 }
