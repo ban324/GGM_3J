@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Turn : MonoBehaviour
 {
-    public enum State
+    public enum State : short
     {
-        Standby,
-        Select,
-        Active,
-        Effect,
-        Enemy_Turn,
-        End
+        Standby = 0,
+        Select = 1,
+        Active = 2,
+        Effect = 3,
+        Enemy_Turn = 4,
+        End = 5
     }
     State state;
     private void Update()
