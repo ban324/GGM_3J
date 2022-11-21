@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turn : MonoBehaviour
+public class Turn : MonoBehaviour, Instances
 {
+    public void SetInstance()
+    {
+        if (instance != null) Debug.Log("Á¿µÊ");
+        instance = this;
+    }
+
+    public static Turn instance;
     public enum State : short
     {
         Standby = 0,
@@ -13,7 +20,11 @@ public class Turn : MonoBehaviour
         Enemy_Turn = 4,
         End = 5
     }
-    State state;
+    public State state;
+    private void Awake()
+    {
+        SetInstance();
+    }
     private void Update()
     {
         if(state == State.Standby)

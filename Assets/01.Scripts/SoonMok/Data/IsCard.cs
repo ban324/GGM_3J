@@ -10,8 +10,13 @@ public class IsCard : MonoBehaviour
     public StreamReader _reader;
     public TextAsset _textAsset;
 
-    private void OnEnable()
+    public void GetCard()
     {
-        
+        cardId = Random.Range(0, 14);
+    }
+    public void Use(int who)
+    {
+
+        CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1);
     }
 }

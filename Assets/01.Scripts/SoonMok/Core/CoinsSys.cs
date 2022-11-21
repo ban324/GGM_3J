@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinsSys : MonoBehaviour
+public class CoinsSys : MonoBehaviour, Instances
 {
+    public void SetInstance()
+    {
+        if (instance != null) Debug.Log("Á¿µÊ");
+        instance = this;
+    }
+
     public static CoinsSys instance;
 
     public int M_coin;
@@ -13,21 +19,21 @@ public class CoinsSys : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        SetInstance();
     }
-    public void m_CoinUp(int amount)
+    public void M_CoinUp(int amount)
     {
         M_coin += amount;
     }
-    public void m_lifeUp(int amount)
+    public void M_lifeUp(int amount)
     {
         M_life += amount;
     }
-    public void e_CoinUp(int amount)
+    public void E_CoinUp(int amount)
     {
         E_coin += amount;
     }
-    public void e_lifeUp(int amount)
+    public void E_lifeUp(int amount)
     {
         E_life += amount;
     }
