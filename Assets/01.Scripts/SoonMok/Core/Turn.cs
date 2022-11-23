@@ -2,8 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turn : MonoBehaviour
+public class Turn : MonoBehaviour, Instances
 {
+    delegate void TurnEvent(GameObject go, int e);
+    TurnEvent a;
+    public void SetInstance()
+    {
+        if (instance != null) Debug.Log("좆됨");
+        instance = this;
+    }
+
+    public static Turn instance;
     public enum State : short
     {
         Standby = 0,
@@ -13,27 +22,48 @@ public class Turn : MonoBehaviour
         Enemy_Turn = 4,
         End = 5
     }
-    State state;
+    public State state;
+    private void Awake()
+    {
+        SetInstance();
+    }
     private void Update()
     {
-        if(state == State.Standby)
+        if (state == State.Standby)
         {
-            //턴 시작 전에 효과나오는거
-        }else if(state == State.Select)
+            //패시브
+            Debug.Log("Standby");
+            if (Effect.instance.PassEnd)
+            {
+                state = State.Select;
+                Effect.instance.PESet(false);
+            }
+        } else if (state == State.Select)
         {
-            //사용 효과 선택
-        }else if(state == State.Active)
+            SelectManager.instance.PanelActive(true);
+            if (Effect.instance.SelectEnd)
+            {
+                SelectManager.instance.PanelActive(false);
+                Effect.instance.SESet(false);
+                state = State.Active;
+            }
+        } else if (state == State.Active)
         {
-            //발동 카드 효과 선택
-        }else if(state == State.Effect)
+            if (Effect.instance.ActEnd)
+            {
+                state = State.Effect;
+                Effect.instance.ActEnd = false;
+            }
+        }
+        else if (state == State.Effect)
         {
-            //카드 효과 처리
-        }else if(state == State.End)
+        } else if(state == State.End)
         {
             //에너미 턴으로 넘김
         }else if(state == State.Enemy_Turn)
         {
             //에너미 시스템에서 행동 끝난거 불 받아서 스탠바이로 변경
+            Debug.Log("ENd");
         }
     }
 }
