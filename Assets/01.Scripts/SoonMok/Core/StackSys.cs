@@ -25,6 +25,6 @@ public class StackSys : MonoBehaviour, Instances
         SetInstance();
         stacks.Add(0, reputation);
         stacks.Add(1, people);
-        stacks.Add(3, cult);
+        stacks.Add(2, cult);
     }
 }

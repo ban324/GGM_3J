@@ -27,7 +27,8 @@ public class CardEffect : MonoBehaviour, Instances
         ActiveEffs.Add(1, GetCoins);
         ActiveEffs.Add(2, TakeCoins);
         ActiveEffs.Add(4, Damage);
-        ActiveEffs.Add(5, new CardEff(TakeCoins) + StackUp );
+        ActiveEffs.Add(3, Damage);
+        ActiveEffs.Add(5, new CardEff(TakeCoins));
         ActiveEffs.Add(6, GetCoins);
         ActiveEffs.Add(7, StopSteal);
         ActiveEffs.Add(8, Damage);

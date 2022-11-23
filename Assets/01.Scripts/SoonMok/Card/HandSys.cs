@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HandSys : MonoBehaviour
+public class HandSys : MonoBehaviour, Instances
 {
-    public List<IsCard> handCards = new List<IsCard>();
+    public static HandSys instance;
+    public List<IsCard> handCards;
 
     [SerializeField]private Vector2 startP;
     [SerializeField]private Vector2 endP;
     [SerializeField] float Y;
     [SerializeField] float j;
 
+    public void SetInstance()
+    {
+        instance = this;
+        handCards = new List<IsCard>();
+    }
+    private void Awake()
+    {
+        SetInstance();
+    }
     private void Update()
     {
         if(handCards.Count > 0)
