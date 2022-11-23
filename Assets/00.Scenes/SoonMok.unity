@@ -918,8 +918,8 @@ MonoBehaviour:
   - {fileID: 1593235285}
   - {fileID: 1898196530}
   - {fileID: 1231204138}
-  startP: {x: -2.55, y: 0}
-  endP: {x: 2.07, y: 0}
+  startP: {x: -2, y: 0}
+  endP: {x: 2, y: 0}
   Y: -3
   j: 0
 --- !u!114 &437795249
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
