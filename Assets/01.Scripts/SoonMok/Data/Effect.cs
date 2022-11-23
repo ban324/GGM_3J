@@ -56,4 +56,14 @@ public class Effect : MonoBehaviour, Instances
         HandSys.instance.handCards.Add(newCard);
 
     }
+    public void GetECoin()
+    {
+        CoinsSys.instance.E_CoinUp(2);
+    }
+    public void GetEHand()
+    {
+        IsCard newCard = Instantiate(CardObj).GetComponent<IsCard>();
+        newCard.GetCard();
+        EnemyHandSys.instance.handCards.Add(newCard);
+    }
 }
