@@ -18,9 +18,8 @@ public class Turn : MonoBehaviour, Instances
         Standby = 0,
         Select = 1,
         Active = 2,
-        Effect = 3,
-        Enemy_Turn = 4,
-        End = 5
+        End = 3,
+        Enemy_Turn = 4
     }
     public State state;
     private void Awake()
@@ -33,11 +32,9 @@ public class Turn : MonoBehaviour, Instances
         {
             //패시브
             Debug.Log("Standby");
-            if (Effect.instance.PassEnd)
-            {
                 state = State.Select;
                 Effect.instance.PESet(false);
-            }
+            
         } else if (state == State.Select)
         {
             SelectManager.instance.PanelActive(true);
@@ -51,19 +48,18 @@ public class Turn : MonoBehaviour, Instances
         {
             if (Effect.instance.ActEnd)
             {
-                state = State.Effect;
+                state = State.End;
                 Effect.instance.ActEnd = false;
             }
-        }
-        else if (state == State.Effect)
+        }else if(state == State.End)
         {
-        } else if(state == State.End)
-        {
+            state = State.Enemy_Turn;
             //에너미 턴으로 넘김
         }else if(state == State.Enemy_Turn)
         {
-            //에너미 시스템에서 행동 끝난거 불 받아서 스탠바이로 변경
+            EnemyAI.instance.Enemy();
             Debug.Log("ENd");
+            state = State.Standby;
         }
     }
 }

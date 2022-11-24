@@ -67,5 +67,13 @@ public class IsCard : MonoBehaviour
             default:
                 break;
         }
+        foreach(IsCard a in HandSys.instance.handCards)
+        {
+            Debug.Log(a.cardId);
+        }
+        if(who == 0) HandSys.instance.handCards.RemoveAt(HandSys.instance.handCards.IndexOf(this));
+        else EnemyHandSys.instance.handCards.RemoveAt(EnemyHandSys.instance.handCards.IndexOf(this));
+
+        Destroy(gameObject);
     }
 }

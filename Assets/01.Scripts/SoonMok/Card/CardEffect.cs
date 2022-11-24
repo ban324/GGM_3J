@@ -73,7 +73,7 @@ public class CardEffect : MonoBehaviour, Instances
     public void StackUp(int Member, int count)
     {
         StackSys.instance.stacks[Member] += count;
-        if (Turn.instance.state == Turn.State.Effect) Effect.instance.ActEnd = true;
+        if (Turn.instance.state == Turn.State.Active) Effect.instance.ActEnd = true;
     }
 
     public void Damage(int who, int count)
