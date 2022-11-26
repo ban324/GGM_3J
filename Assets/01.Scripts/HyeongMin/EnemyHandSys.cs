@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHandSys : MonoBehaviour
+public class EnemyHandSys : MonoBehaviour, Instances
 {
     public static EnemyHandSys instance;
     public List<IsCard> handCards;

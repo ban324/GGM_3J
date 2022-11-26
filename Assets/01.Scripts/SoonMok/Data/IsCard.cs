@@ -4,7 +4,9 @@ using System.IO;
 using UnityEngine;
 
 public class IsCard : MonoBehaviour
-{   
+{
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     public int cardId;
     public int CardCost;
     public StreamReader _reader;
@@ -17,7 +19,14 @@ public class IsCard : MonoBehaviour
     public void GetCard()
     {
         cardId = Random.Range(0, 14);
+
     }
+
+    public void ChangeSprite(int id)
+    {
+        _spriteRenderer.sprite = Turn.instance.Sprites[id];
+    }
+
     public void Use(int who)
     {
         switch (cardId)
@@ -67,5 +76,13 @@ public class IsCard : MonoBehaviour
             default:
                 break;
         }
+        foreach(IsCard a in HandSys.instance.handCards)
+        {
+            Debug.Log(a.cardId);
+        }
+        if(who == 0) HandSys.instance.handCards.RemoveAt(HandSys.instance.handCards.IndexOf(this));
+        else EnemyHandSys.instance.handCards.RemoveAt(EnemyHandSys.instance.handCards.IndexOf(this));
+
+        Destroy(gameObject);
     }
 }

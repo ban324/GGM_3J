@@ -7,7 +7,7 @@ public class CardEffect : MonoBehaviour, Instances
 
     public static CardEffect instance;//권순목 제작. 제네릭
     public delegate void CardEff(int who, int count);
-    private int disableSteal;
+    public int disableSteal;
     public Dictionary<int, CardEff> ActiveEffs;
     private void Awake()
     {
@@ -58,22 +58,26 @@ public class CardEffect : MonoBehaviour, Instances
     }
     public void TakeCoins(int who, int count)
     {
-        if(who == 0)
+        if (disableSteal<=0)
         {
-            CoinsSys.instance.M_CoinUp(count);
-            CoinsSys.instance.E_CoinUp(-count);
-            Effect.instance.ActEnd = true;
-        }
-        else
-        {
-            CoinsSys.instance.M_CoinUp(-count);
-            CoinsSys.instance.E_CoinUp(count);
+            if (who == 0)
+            {
+                CoinsSys.instance.M_CoinUp(count);
+                CoinsSys.instance.E_CoinUp(-count);
+                Effect.instance.ActEnd = true;
+            }
+            else
+            {
+                CoinsSys.instance.M_CoinUp(-count);
+                CoinsSys.instance.E_CoinUp(count);
+            }
+
         }
     }
     public void StackUp(int Member, int count)
     {
         StackSys.instance.stacks[Member] += count;
-        if (Turn.instance.state == Turn.State.Effect) Effect.instance.ActEnd = true;
+        if (Turn.instance.state == Turn.State.Active) Effect.instance.ActEnd = true;
     }
 
     public void Damage(int who, int count)
