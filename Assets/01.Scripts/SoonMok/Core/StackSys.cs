@@ -23,8 +23,8 @@ public class StackSys : MonoBehaviour, Instances
     private void Awake()
     {
         SetInstance();
-        stacks.Add(0, reputation);
-        stacks.Add(1, people);
-        stacks.Add(2, cult);
+        stacks.Add(0, reputation);//치안
+        stacks.Add(1, people);//인구
+        stacks.Add(2, cult);//신앙
     }
 }

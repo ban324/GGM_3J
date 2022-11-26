@@ -12,6 +12,7 @@ public class Effect : MonoBehaviour, Instances
     }
     
     public static Effect instance;
+    public bool EffectEnd;
     public bool ActEnd;
     public bool PassEnd;
     public bool SelectEnd;

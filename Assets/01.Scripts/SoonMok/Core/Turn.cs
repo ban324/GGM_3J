@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Turn : MonoBehaviour, Instances
 {
+    public Sprite[] Sprites;
     delegate void TurnEvent(GameObject go, int e);
     TurnEvent a;
     public void SetInstance()
@@ -18,8 +19,9 @@ public class Turn : MonoBehaviour, Instances
         Standby = 0,
         Select = 1,
         Active = 2,
-        End = 3,
-        Enemy_Turn = 4
+        Effect = 3,
+        End = 4,
+        Enemy_Turn = 5
     }
     public State state;
     private void Awake()
@@ -30,10 +32,10 @@ public class Turn : MonoBehaviour, Instances
     {
         if (state == State.Standby)
         {
-            //패시브
-            Debug.Log("Standby");
-                state = State.Select;
-                Effect.instance.PESet(false);
+            PassiveEff.instance.UsePassive(0);
+            PassiveEff.instance.UsePassive(1);
+            state = State.Select;
+            Effect.instance.PESet(false);
             
         } else if (state == State.Select)
         {
@@ -48,8 +50,15 @@ public class Turn : MonoBehaviour, Instances
         {
             if (Effect.instance.ActEnd)
             {
-                state = State.End;
+                state = State.Effect;
                 Effect.instance.ActEnd = false;
+            }
+        }else if(state == State.Effect)
+        {
+            if (Effect.instance.EffectEnd)
+            {
+                Effect.instance.EffectEnd = false;
+                state++;
             }
         }else if(state == State.End)
         {
@@ -57,6 +66,7 @@ public class Turn : MonoBehaviour, Instances
             //에너미 턴으로 넘김
         }else if(state == State.Enemy_Turn)
         {
+            CardEffect.instance.disableSteal--;
             EnemyAI.instance.Enemy();
             Debug.Log("ENd");
             state = State.Standby;

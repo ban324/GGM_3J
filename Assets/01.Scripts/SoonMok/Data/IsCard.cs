@@ -4,7 +4,9 @@ using System.IO;
 using UnityEngine;
 
 public class IsCard : MonoBehaviour
-{   
+{
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     public int cardId;
     public int CardCost;
     public StreamReader _reader;
@@ -17,7 +19,14 @@ public class IsCard : MonoBehaviour
     public void GetCard()
     {
         cardId = Random.Range(0, 14);
+
     }
+
+    public void ChangeSprite(int id)
+    {
+        _spriteRenderer.sprite = Turn.instance.Sprites[id];
+    }
+
     public void Use(int who)
     {
         switch (cardId)
