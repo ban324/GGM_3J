@@ -20,7 +20,7 @@ public class PassiveEff : MonoBehaviour, Instances
         {
             for (int i = 0; i < HandSys.instance.handCards.Count; i++)
             {
-                if (PassiveEffs[i] != null)
+                if (PassiveEffs.ContainsKey(i))
                 {
                     int j = 0;
                     switch (i)

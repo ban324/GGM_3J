@@ -32,7 +32,7 @@ public class Turn : MonoBehaviour, Instances
     {
         if (state == State.Standby)
         {
-            PassiveEff.instance.UsePassive(0);
+            PassiveEff.instance.UsePassive(0);  
             PassiveEff.instance.UsePassive(1);
             state = State.Select;
             Effect.instance.PESet(false);
