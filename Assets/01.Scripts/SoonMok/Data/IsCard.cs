@@ -16,19 +16,23 @@ public class IsCard : MonoBehaviour
     {
         GetCard();
     }
+    private void OnEnable()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     public void GetCard()
     {
         cardId = Random.Range(0, 14);
-
     }
 
     public void ChangeSprite(int id)
     {
-        _spriteRenderer.sprite = Turn.instance.Sprites[id];
+        _spriteRenderer.sprite = Turn.instance?.Sprites[id];
     }
 
     public void Use(int who)
     {
+        ChangeSprite(cardId);
         switch (cardId)
         {
             case 0: CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1); break;
@@ -69,6 +73,7 @@ public class IsCard : MonoBehaviour
             case 12:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, (CoinsSys.instance.M_coin + CoinsSys.instance.E_coin)/2);
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who * -1, (CoinsSys.instance.M_coin + CoinsSys.instance.E_coin)/2);
+                Debug.Log((CoinsSys.instance.M_coin + CoinsSys.instance.E_coin) / 2 +" "+ who);
                 break;
             case 13:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 3 + StackSys.instance.stacks[1]);
@@ -76,13 +81,9 @@ public class IsCard : MonoBehaviour
             default:
                 break;
         }
-        foreach(IsCard a in HandSys.instance.handCards)
-        {
-            Debug.Log(a.cardId);
-        }
         if(who == 0) HandSys.instance.handCards.RemoveAt(HandSys.instance.handCards.IndexOf(this));
         else EnemyHandSys.instance.handCards.RemoveAt(EnemyHandSys.instance.handCards.IndexOf(this));
+        UseCardEff.instance.UseEffect(this);
 
-        Destroy(gameObject);
     }
 }

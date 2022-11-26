@@ -20,19 +20,30 @@ public class EnemyAI : MonoBehaviour, Instances
         {
             case 0:
                 Effect.instance.GetECoin();
+                Debug.LogError("적코인");
+                Effect.instance.EffectEnd = true;
+
                 break;
             case 1:
                     Effect.instance.GetEHand();
-                    break;
+                Debug.LogError("적카드");
+                Effect.instance.EffectEnd = true;
+
+                break;
             case 2:
                 if(EnemyHandSys.instance.handCards.Count > 0)
                 {
+                    Debug.Log("적사용");
                     EnemyHandSys.instance.handCards[Random.Range(0, EnemyHandSys.instance.handCards.Count)].Use(1);
-                    Effect.instance.GetEHand();
+                    IsCard newCard = Instantiate(Effect.instance.CardObj).GetComponent<IsCard>();
+                    newCard.GetCard();
+                    EnemyHandSys.instance.handCards.Add(newCard); Debug.Log("사용완료");
+
                     break;
 
-                }goto case 1;
+                }Effect.instance.GetEHand();
+                Effect.instance.EffectEnd = true;
+                break;
         }
-
     }
 }

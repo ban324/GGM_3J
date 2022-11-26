@@ -5,6 +5,7 @@ using UnityEngine;
 public class Turn : MonoBehaviour, Instances
 {
     public Sprite[] Sprites;
+    [SerializeField] private bool isWait;
     delegate void TurnEvent(GameObject go, int e);
     TurnEvent a;
     public void SetInstance()
@@ -13,6 +14,7 @@ public class Turn : MonoBehaviour, Instances
         instance = this;
     }
 
+    
     public static Turn instance;
     public enum State : short
     {
@@ -34,8 +36,12 @@ public class Turn : MonoBehaviour, Instances
         {
             PassiveEff.instance.UsePassive(0);  
             PassiveEff.instance.UsePassive(1);
-            state = State.Select;
+            Effect.instance.AESet(false);
+            Effect.instance.SESet(false);
+            Effect.instance.EffectEnd = false;
             Effect.instance.PESet(false);
+            Debug.Log("Standby");
+            if (!isWait) StartCoroutine(Delay(State.Select));
             
         } else if (state == State.Select)
         {
@@ -43,7 +49,8 @@ public class Turn : MonoBehaviour, Instances
             if (Effect.instance.SelectEnd)
             {
                 SelectManager.instance.PanelActive(false);
-                Effect.instance.SESet(false);
+                state = State.Active;
+                Debug.Log("Select");
                 state = State.Active;
             }
         } else if (state == State.Active)
@@ -51,25 +58,41 @@ public class Turn : MonoBehaviour, Instances
             if (Effect.instance.ActEnd)
             {
                 state = State.Effect;
-                Effect.instance.ActEnd = false;
+                Debug.Log("Active");
             }
         }else if(state == State.Effect)
         {
             if (Effect.instance.EffectEnd)
             {
+                if (!isWait) StartCoroutine(Delay(State.Enemy_Turn));
+                Debug.Log("Effect");
                 Effect.instance.EffectEnd = false;
-                state++;
+
             }
-        }else if(state == State.End)
-        {
-            state = State.Enemy_Turn;
-            //에너미 턴으로 넘김
-        }else if(state == State.Enemy_Turn)
-        {
-            CardEffect.instance.disableSteal--;
-            EnemyAI.instance.Enemy();
-            Debug.Log("ENd");
-            state = State.Standby;
         }
+        else if(state == State.Enemy_Turn)
+        {
+            if (Effect.instance.EffectEnd)
+            {
+                state = State.End;
+                Debug.Log("Enemy");
+            }
+            else
+            {
+                CardEffect.instance.disableSteal--;
+                EnemyAI.instance.Enemy();
+            }
+        }
+        else if (state == State.End)
+        {
+            if(!isWait) StartCoroutine(Delay(State.Standby));
+        }
+    }
+    IEnumerator Delay(State Nstate)
+    {
+        isWait = true;
+        yield return new WaitForSeconds(1f);
+        state = Nstate;
+        isWait = false;
     }
 }

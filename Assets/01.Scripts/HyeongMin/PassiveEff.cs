@@ -39,7 +39,7 @@ public class PassiveEff : MonoBehaviour, Instances
         {
             for (int i = 0; i < EnemyHandSys.instance.handCards.Count; i++)
             {
-                if (PassiveEffs[i] != null)
+                if (PassiveEffs.ContainsKey(i)) 
                 {
                     int j = 0;
                     switch (i)
@@ -75,7 +75,6 @@ public class PassiveEff : MonoBehaviour, Instances
         if (who == 0)
         {
             CoinsSys.instance.M_CoinUp(count);
-            Effect.instance.ActEnd = true;
         }
         else
         {
@@ -88,7 +87,6 @@ public class PassiveEff : MonoBehaviour, Instances
         {
             CoinsSys.instance.M_CoinUp(count);
             CoinsSys.instance.E_CoinUp(-count);
-            Effect.instance.ActEnd = true;
         }
         else
         {
@@ -99,7 +97,6 @@ public class PassiveEff : MonoBehaviour, Instances
     public void StackUp(int Member, int count)
     {
         StackSys.instance.stacks[Member] += count;
-        if (Turn.instance.state == Turn.State.Active) Effect.instance.ActEnd = true;
     }
 
 
