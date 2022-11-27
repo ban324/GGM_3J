@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     public void StBtn()
     {
-        Debug.Log("게임 시작");
+        SceneManager.LoadScene("SoonMok");
     }
     
     public void SettBtn()
