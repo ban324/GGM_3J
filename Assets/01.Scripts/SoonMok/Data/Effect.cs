@@ -17,10 +17,6 @@ public class Effect : MonoBehaviour, Instances
     {
         GetHand();
         GetHand();
-        GetHand();
-        GetHand();
-        GetEHand();
-        GetEHand();
         GetEHand();
         GetEHand();
         StartCoroutine(FloatingTxt("Ω√¿€!"));
@@ -71,11 +67,6 @@ public class Effect : MonoBehaviour, Instances
     public void ActiveHand()
     {
         SelectEnd = true;
-        IsCard newCard = Instantiate(CardObj).GetComponent<IsCard>();
-        newCard.GetCard();
-        newCard.forEnemy = false;
-        HandSys.instance.handCards.Add(newCard);
-
     }
     public void GetECoin()
     {
@@ -106,7 +97,7 @@ public class Effect : MonoBehaviour, Instances
         {
             a.a -= 0.1f;
             b.color = a;
-            c.color = a;
+            c.color = new Color(0, 0, 0, a.a);
             yield return new WaitForSeconds(0.1f);
         }
         EffectEnd = true;

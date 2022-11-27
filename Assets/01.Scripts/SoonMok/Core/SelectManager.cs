@@ -24,7 +24,7 @@ public class SelectManager : MonoBehaviour, Instances
         if (state)
         {
 
-            if (CoinsSys.instance.M_coin < 2)
+            if (CoinsSys.instance.M_coin < 2 || HandSys.instance.handCards.Count < 1)
             {
                 ActiveButton.SetActive(false);
             }
