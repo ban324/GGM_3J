@@ -7,6 +7,7 @@ public class IsCard : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
+    public bool forEnemy;
     public int cardId;
     public int CardCost;
     public StreamReader _reader;
@@ -28,10 +29,12 @@ public class IsCard : MonoBehaviour
     public void ChangeSprite(int id)
     {
         _spriteRenderer.sprite = Turn.instance?.Sprites[id];
+        Debug.Log(Turn.instance.Sprites[id]);
     }
 
     public void Use(int who)
     {
+        CoinsSys.instance.M_CoinUp(-2);
         ChangeSprite(cardId);
         switch (cardId)
         {
@@ -68,7 +71,7 @@ public class IsCard : MonoBehaviour
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1 + StackSys.instance.stacks[0]);
                 break;
             case 11:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, HandSys.instance.handCards.Count);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who, HandSys.instance.handCards.Count);   
                 break;
             case 12:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, (CoinsSys.instance.M_coin + CoinsSys.instance.E_coin)/2);

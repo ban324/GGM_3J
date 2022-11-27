@@ -5,12 +5,13 @@ using UnityEngine;
 public class Turn : MonoBehaviour, Instances
 {
     public Sprite[] Sprites;
+    [SerializeField]
+    GameObject[] turnImages; 
     [SerializeField] private bool isWait;
     delegate void TurnEvent(GameObject go, int e);
     TurnEvent a;
     public void SetInstance()
     {
-        if (instance != null) Debug.Log("量凳");
         instance = this;
     }
 
@@ -40,8 +41,7 @@ public class Turn : MonoBehaviour, Instances
             Effect.instance.SESet(false);
             Effect.instance.EffectEnd = false;
             Effect.instance.PESet(false);
-            Debug.Log("Standby");
-            if (!isWait) StartCoroutine(Delay(State.Select));
+            if(!WInLose())state = State.Select;
             
         } else if (state == State.Select)
         {
@@ -50,7 +50,6 @@ public class Turn : MonoBehaviour, Instances
             {
                 SelectManager.instance.PanelActive(false);
                 state = State.Active;
-                Debug.Log("Select");
                 state = State.Active;
             }
         } else if (state == State.Active)
@@ -58,14 +57,12 @@ public class Turn : MonoBehaviour, Instances
             if (Effect.instance.ActEnd)
             {
                 state = State.Effect;
-                Debug.Log("Active");
             }
         }else if(state == State.Effect)
         {
             if (Effect.instance.EffectEnd)
             {
-                if (!isWait) StartCoroutine(Delay(State.Enemy_Turn));
-                Debug.Log("Effect");
+                if (!isWait) StartCoroutine(Delay(State.Enemy_Turn, 2));
                 Effect.instance.EffectEnd = false;
 
             }
@@ -75,23 +72,49 @@ public class Turn : MonoBehaviour, Instances
             if (Effect.instance.EffectEnd)
             {
                 state = State.End;
-                Debug.Log("Enemy");
+                enemyEnd = false;
             }
-            else
-            {
                 CardEffect.instance.disableSteal--;
                 EnemyAI.instance.Enemy();
-            }
+                enemyEnd = true;
+            
         }
         else if (state == State.End)
         {
-            if(!isWait) StartCoroutine(Delay(State.Standby));
+            
+            if(!isWait ) StartCoroutine(Delay(State.Standby, 1));
         }
     }
-    IEnumerator Delay(State Nstate)
+    public bool enemyEnd;
+    public bool WInLose()
+    {
+        if((CoinsSys.instance.E_coin <0 && CoinsSys.instance.M_coin < 0) || (CoinsSys.instance.E_life < 1 && CoinsSys.instance.M_life < 1))
+        {
+            if(!isEnd)Effect.instance.floatingTxt("公铰何!");
+            isEnd = true;
+            return true;
+        }
+        if(CoinsSys.instance.E_coin <0 ||CoinsSys.instance.E_life < 1)
+        {
+            if (!isEnd) Effect.instance.floatingTxt("铰府!");
+            isEnd = true;
+
+            return true;
+        }
+        if (CoinsSys.instance.M_coin < 0 || CoinsSys.instance.M_life < 1)
+        {
+            if (!isEnd) Effect.instance.floatingTxt("菩硅!");
+            isEnd = true;
+            return true;
+        }
+
+        return false;
+    }
+    public bool isEnd;
+    IEnumerator Delay(State Nstate, int times)
     {
         isWait = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(times);
         state = Nstate;
         isWait = false;
     }

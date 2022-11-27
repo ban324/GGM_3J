@@ -17,7 +17,6 @@ public class StackSys : MonoBehaviour, Instances
             instance = this;
 
         }
-        else Debug.LogError("Á¿µÊ");
     }
 
     private void Awake()

@@ -15,35 +15,51 @@ public class EnemyAI : MonoBehaviour, Instances
         SetInstance();
     }
     public void Enemy()
-    {
-        switch (Random.Range(0, 3))
+    { if (Turn.instance.enemyEnd)
         {
-            case 0:
+            int x = Random.Range(0, 4);
+            if(x == 0)
+            {
                 Effect.instance.GetECoin();
                 Debug.LogError("적코인");
                 Effect.instance.EffectEnd = true;
-
-                break;
-            case 1:
-                    Effect.instance.GetEHand();
-                Debug.LogError("적카드");
+            }
+            else if(x == 1)
+            {
+                Effect.instance.GetEHand();
                 Effect.instance.EffectEnd = true;
 
-                break;
-            case 2:
-                if(EnemyHandSys.instance.handCards.Count > 0)
+            }
+            else if(x == 2)
+            {
+                if (EnemyHandSys.instance.handCards.Count > 0)
                 {
-                    Debug.Log("적사용");
+                    Debug.LogError("적사용");
                     EnemyHandSys.instance.handCards[Random.Range(0, EnemyHandSys.instance.handCards.Count)].Use(1);
                     IsCard newCard = Instantiate(Effect.instance.CardObj).GetComponent<IsCard>();
                     newCard.GetCard();
-                    EnemyHandSys.instance.handCards.Add(newCard); Debug.Log("사용완료");
-
-                    break;
-
-                }Effect.instance.GetEHand();
+                    newCard.forEnemy = true;
+                    EnemyHandSys.instance.handCards.Add(newCard);
+                    Debug.LogError("사용완료");
+                    }
+                Effect.instance.GetEHand();
                 Effect.instance.EffectEnd = true;
-                break;
+
+            }else if (x == 3)
+            {
+
+                Debug.LogError("어택시도");
+                if (CoinsSys.instance.E_coin > 6)
+                {
+                    Effect.instance.Attack(1);
+                }
+                else
+                {
+                    Effect.instance.GetECoin();
+                    Effect.instance.EffectEnd = true;
+                }
+            }
         }
-    }
+    } 
 }
+
