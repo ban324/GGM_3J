@@ -26,13 +26,11 @@ public class CardData : MonoBehaviour
                     effects.Add(effectLine.Split(","));
                 if (!(effectLine == null))
                 {
-                    Debug.Log(effectLine);
                 }
                 else effectLine.Remove(effectLine.Length -1);
             }
             catch (NullReferenceException ex)
             {
-                Debug.Log(ex);
                 break;
             }
         }

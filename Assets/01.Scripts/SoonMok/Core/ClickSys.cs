@@ -14,7 +14,10 @@ public class ClickSys : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousepos, Vector2.zero);
                 if (hit)
                 {
-                    hit.collider.GetComponent<IsCard>().Use(0);
+                    if (!hit.collider.GetComponent<IsCard>().forEnemy)
+                    {
+                        hit.collider.GetComponent<IsCard>().Use(0);
+                    }
 
                 }
             }

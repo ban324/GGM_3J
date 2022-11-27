@@ -31,6 +31,7 @@ public class EnemyHandSys : MonoBehaviour, Instances
             {
                 j += a;
                 handCards[i].transform.position = new Vector3(j, Y);
+                handCards[i].ChangeSprite(14);
             }
         }
     }

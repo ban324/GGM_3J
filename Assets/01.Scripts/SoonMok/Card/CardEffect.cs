@@ -5,10 +5,10 @@ using UnityEngine;
 public class CardEffect : MonoBehaviour, Instances
 {
 
-    public static CardEffect instance;//권순목 제작. 제네릭
+    public static CardEffect instance;
     public delegate void CardEff(int who, int count);
     public int disableSteal;
-    public Dictionary<int, CardEff> ActiveEffs;
+    public Dictionary<int, CardEff> ActiveEffs;//권순목 제작. 제네릭
     private void Awake()
     {
         ActiveEffs = new Dictionary<int, CardEff>();
@@ -26,8 +26,8 @@ public class CardEffect : MonoBehaviour, Instances
         });
         ActiveEffs.Add(1, GetCoins);
         ActiveEffs.Add(2, TakeCoins);
-        ActiveEffs.Add(4, Damage);
         ActiveEffs.Add(3, Damage);
+        ActiveEffs.Add(4, Damage);
         ActiveEffs.Add(5, new CardEff(TakeCoins));
         ActiveEffs.Add(6, GetCoins);
         ActiveEffs.Add(7, StopSteal);
@@ -43,6 +43,7 @@ public class CardEffect : MonoBehaviour, Instances
     public void StopSteal(int who, int turnCount)
     {
         disableSteal = turnCount;
+        if (who == 0) Effect.instance.ActEnd = true;
     }
     public void GetCoins(int who, int count)
     {
@@ -95,7 +96,6 @@ public class CardEffect : MonoBehaviour, Instances
 
     public void SetInstance()
     {
-        if (instance != null) Debug.Log("좆됨");
         instance = this;
     }
 }

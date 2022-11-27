@@ -7,7 +7,6 @@ public class HandSys : MonoBehaviour, Instances
     public static HandSys instance;
     public List<IsCard> handCards;
 
-    [SerializeField] private Transform cards;
     [SerializeField]private Vector2 startP;
     [SerializeField]private Vector2 endP;
     [SerializeField] float Y;
@@ -17,10 +16,6 @@ public class HandSys : MonoBehaviour, Instances
     {
         instance = this;
         handCards = new List<IsCard>();
-        for(int i =0; i < cards.childCount ; i++)
-        {
-            handCards.Add(cards.GetComponentsInChildren<IsCard>()[i]);
-        }
     }
     private void Awake()
     {
@@ -36,6 +31,7 @@ public class HandSys : MonoBehaviour, Instances
             {
                 j += a;
                 handCards[i].transform.position = new Vector3(j, Y);
+                handCards[i].ChangeSprite(handCards[i].cardId);
             }
         }
     }

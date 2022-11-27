@@ -2,23 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UseCardEff : MonoBehaviour
+public class UseCardEff : MonoBehaviour, Instances
 {
-    [SerializeField] private GameObject cardTest;//나중에지우던가하셈
-    [SerializeField] private float speed;
 
-    private void Start()
+    [SerializeField] private float speed;
+    public static UseCardEff instance;
+    private void Awake()
     {
-        StartCoroutine(UseCard(cardTest.transform.GetChild(0).GetComponent<IsCard>()));
+        SetInstance();
+    }
+    public void UseEffect(IsCard card)
+    {
+        StartCoroutine(UseCard(card));
+
     }
     public IEnumerator UseCard(IsCard isCard, float time = 2f)
     {
         GameObject card = isCard.gameObject;
-        card.transform.position = Vector3.MoveTowards(card.transform.position, new Vector3(0, 0, 0), speed * Time.deltaTime);
-        yield return new WaitForSeconds(time);
+        while(Vector3.Distance(card.transform.position, Vector3.zero) > 0.2f)
+        {
+            card.transform.position = Vector3.MoveTowards(card.transform.position, new Vector3(0, 0, 0), speed * Time.deltaTime);
+            yield return new WaitForSeconds(time * Time.deltaTime);
+
+        }
         StartCoroutine(SizeUpCard(card));
     }
-    IEnumerator SizeUpCard(GameObject card, float upScale = 0.01f, float time = 1f)
+    IEnumerator SizeUpCard(GameObject card, float upScale = 0.03f, float time = 1f)
     {
         Vector3 cardScale = card.transform.localScale;
         while (card.transform.localScale.x <= (cardScale.x * 1.5f) && card.transform.localScale.y <= (cardScale.y * 1.5f))
@@ -29,7 +38,7 @@ public class UseCardEff : MonoBehaviour
         yield return new WaitForSeconds(time);
         StartCoroutine(FadeInCard(card));
     }
-    IEnumerator FadeInCard(GameObject card, float fadeCount = 1, float timeAndScale = 0.01f)
+    IEnumerator FadeInCard(GameObject card, float fadeCount = 1, float timeAndScale = 0.1f)
     {
         while (fadeCount > 0)
         {
@@ -37,9 +46,17 @@ public class UseCardEff : MonoBehaviour
                 card.GetComponent<SpriteRenderer>().color.g,
                 card.GetComponent<SpriteRenderer>().color.b
                 , fadeCount);
-            fadeCount -= timeAndScale;
+            fadeCount -= timeAndScale ;
             yield return new WaitForSeconds(timeAndScale);
         }
+
         Destroy(card);
+        Effect.instance.EffectEnd = true;
+    }
+
+    public void SetInstance()
+    {
+        if (instance != null) Debug.LogError("asdf");
+        instance = this;
     }
 }

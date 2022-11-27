@@ -6,7 +6,6 @@ public class CoinsSys : MonoBehaviour, Instances
 {
     public void SetInstance()
     {
-        if (instance != null) Debug.Log("Á¿µÊ");
         instance = this;
     }
 
