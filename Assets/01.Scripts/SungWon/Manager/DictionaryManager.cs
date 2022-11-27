@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class DictionaryManager : MonoBehaviour
 {
-    public Button btn;
-
     public void ExitBtn()
     {
         SceneManager.LoadScene("Main");
     }
-
+    
+    public void XBtn()
+    {
+        SceneManager.LoadScene("Dictionary");
+    }
 
 }
