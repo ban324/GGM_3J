@@ -36,10 +36,6 @@ public class EnemyAI : MonoBehaviour, Instances
                 {
                     Debug.LogError("적사용");
                     EnemyHandSys.instance.handCards[Random.Range(0, EnemyHandSys.instance.handCards.Count)].Use(1);
-                    IsCard newCard = Instantiate(Effect.instance.CardObj).GetComponent<IsCard>();
-                    newCard.GetCard();
-                    newCard.forEnemy = true;
-                    EnemyHandSys.instance.handCards.Add(newCard);
                     Debug.LogError("사용완료");
                     }
                 Effect.instance.GetEHand();
