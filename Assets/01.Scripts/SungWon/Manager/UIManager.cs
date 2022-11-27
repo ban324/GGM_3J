@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 public class UIManager : MonoBehaviour
 {
     #region UI 선언 
@@ -14,21 +16,15 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
-    public Image DictionaryWin;
-    public Vector2 OriginPos;
 
     private void Start()
     {
-        OriginPos = new Vector2(0, 0);
-
-        DictionaryWin.GetComponent<RectTransform>();
-
+       
     }
-
-    public void DicBtn()
+    
+    public void HomeBtn()
     {
-        DictionaryWin.rectTransform.DOMove(OriginPos, 1);
-        Debug.Log("사전");
+        SceneManager.LoadScene("Main");
     }
 
     public void StBtn()
