@@ -1537,7 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf8353595c0b8c458462f9f1ae23ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Card1: {fileID: 21300000, guid: 3fcc4344d9a5dc94cafb39943160be84, type: 3}
+  Card1: {fileID: 21300000, guid: 298c4a780b114e0418655bd864639e0e, type: 3}
   info: {fileID: 1655621092}
   Panel: {fileID: 1919276865}
 --- !u!1 &677045758
