@@ -28,16 +28,19 @@ public class GameResult : MonoBehaviour
             case 1:
                 img.sprite = Win;
                 ad.clip = BgmWin;
+                ad.Play();
                 break;
 
             case 0:
                 img.sprite = Draw;
                 ad.clip = BgmDraw;
+                ad.Play();
                 break;
 
             case 2:
                 img.sprite = Lose;
                 ad.clip = BgmLose;
+                ad.Play();
                 break;
 
         }
