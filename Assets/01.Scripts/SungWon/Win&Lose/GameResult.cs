@@ -22,14 +22,15 @@ public class GameResult : MonoBehaviour
 
     private void Start()
     {
+        i = PlayerPrefs.GetInt("WIN", 0);
         switch (i)
         {
-            case 0:
+            case 1:
                 img.sprite = Win;
                 ad.clip = BgmWin;
                 break;
 
-            case 1:
+            case 0:
                 img.sprite = Draw;
                 ad.clip = BgmDraw;
                 break;

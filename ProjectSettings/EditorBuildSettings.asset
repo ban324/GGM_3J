@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/00.Scenes/Main.unity
-    guid: d8541508d58a28f4589c710c949f12d9
+    guid: 3615687f668893a4ea4bcdfe5f67cde7
+  - enabled: 1
+    path: Assets/00.Scenes/SoonMok.unity
+    guid: 3607c6ad3deca04469af271c2dbb0868
   - enabled: 1
     path: Assets/00.Scenes/Dictionary.unity
     guid: f273e2b23ca9d4b4fb40328c3783f0d0
   - enabled: 1
-    path: Assets/00.Scenes/SoonMok.unity
-    guid: 3607c6ad3deca04469af271c2dbb0868
+    path: Assets/00.Scenes/GameResult.unity
+    guid: bfeae170c1b19114fa91ae2a1caa9b6e
   m_configObjects: {}

@@ -43,7 +43,7 @@ public class IsCard : MonoBehaviour
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[1]);
                 break;
             case 2:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[0]);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[1]);
                 break;
             case 3:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1); 
@@ -52,10 +52,10 @@ public class IsCard : MonoBehaviour
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1);
                 break;
             case 5:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(-who, -1);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who == 0 ? 1 : 0, -1);
                 break;
             case 6:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(-who,-1);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who,2);
                 break;
             case 7:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 3);
@@ -86,6 +86,6 @@ public class IsCard : MonoBehaviour
         if(who == 0) HandSys.instance.handCards.RemoveAt(HandSys.instance.handCards.IndexOf(this));
         else EnemyHandSys.instance.handCards.RemoveAt(EnemyHandSys.instance.handCards.IndexOf(this));
         UseCardEff.instance.UseEffect(this);
-
+        if (who == 0) Effect.instance.ActEnd = true;
     }
 }

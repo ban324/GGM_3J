@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Turn : MonoBehaviour, Instances
 {
@@ -93,6 +94,8 @@ public class Turn : MonoBehaviour, Instances
             if(!isEnd)Effect.instance.floatingTxt("¹«½ÂºÎ!");
             isEnd = true;
             PlayerPrefs.SetInt("WIN", 0);
+            SceneManager.LoadScene("GameResult");
+
             return true;
         }
         if(CoinsSys.instance.E_coin <0 ||CoinsSys.instance.E_life < 1)
@@ -100,6 +103,7 @@ public class Turn : MonoBehaviour, Instances
             if (!isEnd) Effect.instance.floatingTxt("½Â¸®!");
             isEnd = true;
             PlayerPrefs.SetInt("WIN", 1);
+            SceneManager.LoadScene("GameResult");
             return true;
         }
         if (CoinsSys.instance.M_coin < 0 || CoinsSys.instance.M_life < 1)
@@ -107,6 +111,7 @@ public class Turn : MonoBehaviour, Instances
             if (!isEnd) Effect.instance.floatingTxt("ÆÐ¹è!");
             isEnd = true;
             PlayerPrefs.SetInt("WIN", 2);
+            SceneManager.LoadScene("GameResult");
             return true;
         }
 

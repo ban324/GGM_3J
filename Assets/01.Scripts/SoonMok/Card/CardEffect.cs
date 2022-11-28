@@ -17,7 +17,6 @@ public class CardEffect : MonoBehaviour, Instances
             {
                 Effect.instance.GetHand();
                 Effect.instance.GetHand();
-                Effect.instance.ActEnd = true;
             }
             else
             {
@@ -30,7 +29,11 @@ public class CardEffect : MonoBehaviour, Instances
             GetCoins(a, StackSys.instance.stacks[1]);
             StackUp(1, StackSys.instance.stacks[1]);
         });
-        ActiveEffs.Add(2, TakeCoins);
+        ActiveEffs.Add(2, (int a, int b) =>
+        {
+            StackUp(0, b);
+            StackUp(1, -b);
+        });
         ActiveEffs.Add(3, (int who, int amo) =>
         {
             if (StackSys.instance.stacks[0] > StackSys.instance.stacks[1] || StackSys.instance.stacks[2] > StackSys.instance.stacks[0])
@@ -87,14 +90,12 @@ public class CardEffect : MonoBehaviour, Instances
     public void StopSteal(int who, int turnCount)
     {
         disableSteal = turnCount;
-        if (who == 0) Effect.instance.ActEnd = true;
     }
     public void GetCoins(int who, int count)
     {
         if(who == 0)
         {
             CoinsSys.instance.M_CoinUp(count);
-            Effect.instance.ActEnd = true;
         }
         else
         {
@@ -109,7 +110,6 @@ public class CardEffect : MonoBehaviour, Instances
             {
                 CoinsSys.instance.M_CoinUp(count);
                 CoinsSys.instance.E_CoinUp(-count);
-                Effect.instance.ActEnd = true;
             }
             else
             {
@@ -122,7 +122,6 @@ public class CardEffect : MonoBehaviour, Instances
     public void StackUp(int Member, int count)
     {
         StackSys.instance.stacks[Member] += count;
-        if (Turn.instance.state == Turn.State.Active) Effect.instance.ActEnd = true;
     }
 
     public void Damage(int who, int count)
@@ -130,7 +129,6 @@ public class CardEffect : MonoBehaviour, Instances
         if(who == 0)
         {
             CoinsSys.instance.E_lifeUp(-count);
-            Effect.instance.ActEnd = true;
         }
         else
         {
