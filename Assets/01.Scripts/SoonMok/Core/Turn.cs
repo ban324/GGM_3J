@@ -41,12 +41,12 @@ public class Turn : MonoBehaviour, Instances
             Effect.instance.SESet(false);
             Effect.instance.EffectEnd = false;
             Effect.instance.PESet(false);
-            if(!WInLose())state = State.Select;
+            state = State.Select;
             
         } else if (state == State.Select)
         {
             SelectManager.instance.PanelActive(true);
-            if (Effect.instance.SelectEnd)
+            if (Input.GetKeyDown(KeyCode.K)||Effect.instance.SelectEnd)
             {
                 SelectManager.instance.PanelActive(false);
                 state = State.Active;
@@ -54,7 +54,7 @@ public class Turn : MonoBehaviour, Instances
             }
         } else if (state == State.Active)
         {
-            if (Effect.instance.ActEnd)
+            if (Input.GetKeyDown(KeyCode.K) || Effect.instance.ActEnd)
             {
                 state = State.Effect;
             }
@@ -82,7 +82,7 @@ public class Turn : MonoBehaviour, Instances
         else if (state == State.End)
         {
             
-            if(!isWait ) StartCoroutine(Delay(State.Standby, 1));
+            if(!isWait &&!WInLose()) StartCoroutine(Delay(State.Standby, 1));
         }
     }
     public bool enemyEnd;
@@ -92,19 +92,21 @@ public class Turn : MonoBehaviour, Instances
         {
             if(!isEnd)Effect.instance.floatingTxt("¹«½ÂºÎ!");
             isEnd = true;
+            PlayerPrefs.SetInt("WIN", 0);
             return true;
         }
         if(CoinsSys.instance.E_coin <0 ||CoinsSys.instance.E_life < 1)
         {
             if (!isEnd) Effect.instance.floatingTxt("½Â¸®!");
             isEnd = true;
-
+            PlayerPrefs.SetInt("WIN", 1);
             return true;
         }
         if (CoinsSys.instance.M_coin < 0 || CoinsSys.instance.M_life < 1)
         {
             if (!isEnd) Effect.instance.floatingTxt("ÆÐ¹è!");
             isEnd = true;
+            PlayerPrefs.SetInt("WIN", 2);
             return true;
         }
 

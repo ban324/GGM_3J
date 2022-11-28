@@ -46,20 +46,19 @@ public class IsCard : MonoBehaviour
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[0]);
                 break;
             case 3:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[0]); 
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1); 
                 break;
             case 4:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1);
                 break;
             case 5:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1+StackSys.instance.stacks[2]);
-                StackSys.instance.stacks[2]--;
+                CardEffect.instance.ActiveEffs[cardId].Invoke(-who, -1);
                 break;
             case 6:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who,2+StackSys.instance.stacks[2]);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(-who,-1);
                 break;
             case 7:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, 2);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who, 3);
                 break;
             case 8:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1);
@@ -71,7 +70,7 @@ public class IsCard : MonoBehaviour
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, 1 + StackSys.instance.stacks[0]);
                 break;
             case 11:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, HandSys.instance.handCards.Count);   
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[0] - StackSys.instance.stacks[1]); ;   
                 break;
             case 12:
                 CardEffect.instance.ActiveEffs[cardId].Invoke(who, (CoinsSys.instance.M_coin + CoinsSys.instance.E_coin)/2);
@@ -79,7 +78,7 @@ public class IsCard : MonoBehaviour
                 Debug.Log((CoinsSys.instance.M_coin + CoinsSys.instance.E_coin) / 2 +" "+ who);
                 break;
             case 13:
-                CardEffect.instance.ActiveEffs[cardId].Invoke(who, 3 + StackSys.instance.stacks[1]);
+                CardEffect.instance.ActiveEffs[cardId].Invoke(who, StackSys.instance.stacks[0]);
                 break;
             default:
                 break;
