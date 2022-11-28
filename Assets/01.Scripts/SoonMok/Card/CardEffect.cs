@@ -27,7 +27,7 @@ public class CardEffect : MonoBehaviour, Instances
         ActiveEffs.Add(1, (int a, int b) =>
         {
             GetCoins(a, StackSys.instance.stacks[1]);
-            StackUp(1, StackSys.instance.stacks[1]);
+            StackUp(1, -StackSys.instance.stacks[1]);
         });
         ActiveEffs.Add(2, (int a, int b) =>
         {
@@ -74,9 +74,9 @@ public class CardEffect : MonoBehaviour, Instances
         ActiveEffs.Add(10, TakeCoins);
         ActiveEffs.Add(11, (int who, int amount) =>
         {
-            Damage(who, 1);
-            Damage(-who, 1);
-            StackUp(0, StackSys.instance.stacks[0]);
+            Damage(0, 1);
+            Damage(1, 1);
+            StackUp(0, -StackSys.instance.stacks[0]);
         });
         ActiveEffs.Add(12, GetCoins);
         ActiveEffs.Add(13, (int who, int amount) =>

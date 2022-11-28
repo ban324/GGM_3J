@@ -26,4 +26,11 @@ public class StackSys : MonoBehaviour, Instances
         stacks.Add(people);//¿Œ±∏
         stacks.Add(cult);//Ω≈æ”
     }
+    private void Update()
+    {
+        if (stacks[0] < 0)
+        {
+            stacks[0] = 0;
+        }
+    }
 }
