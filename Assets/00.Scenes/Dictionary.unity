@@ -903,7 +903,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2019345093}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.4082622
+  m_Size: 0.40826213
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1686,7 +1686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf8353595c0b8c458462f9f1ae23ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Card1: {fileID: 21300000, guid: d283034912e17b04aa6b2a35897a142e, type: 3}
+  Card1: {fileID: 21300000, guid: e3c9ba4675f7923428332b02c0aad78d, type: 3}
   info: {fileID: 1655621092}
   Panel: {fileID: 1919276865}
 --- !u!1 &851075221
@@ -1835,7 +1835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf8353595c0b8c458462f9f1ae23ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Card1: {fileID: 21300000, guid: c9c98f0f4d201fd42ac4fba37df2a2fa, type: 3}
+  Card1: {fileID: 21300000, guid: 76ae2cbb122154046a231ab0c3d9a71a, type: 3}
   info: {fileID: 1655621092}
   Panel: {fileID: 1919276865}
 --- !u!1 &951979588
@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf8353595c0b8c458462f9f1ae23ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Card1: {fileID: 21300000, guid: faeb796cb6a65544c9c416f3af7ea789, type: 3}
+  Card1: {fileID: 21300000, guid: 0d4b13540d239694487c2bb551709da3, type: 3}
   info: {fileID: 1655621092}
   Panel: {fileID: 1919276865}
 --- !u!1 &1182148988
