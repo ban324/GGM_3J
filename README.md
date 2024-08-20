@@ -5,9 +5,9 @@
 [**다운로드 바로가기**](https://drive.google.com/file/d/1v1FYpJn7yX-WJksaOytRBMo3socwfdTX/view?usp=sharing)
 
 조선시대의 직업들을 주제로 한 카드들을 이용해 AI와 대결하는 전략 카드 게임입니다.
-![mainView](Assets/02.Sprite/SungWon/Main Scene/Main_Background-002.png)
 
 ![mainView](Assets/02.Sprite/SungWon/Main Scene/Main_Background-002.png)
+
 
 </br>
 
